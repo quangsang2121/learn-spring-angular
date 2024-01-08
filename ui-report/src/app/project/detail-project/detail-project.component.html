@@ -1,0 +1,39 @@
+<h1>1234556</h1>
+<div class="row">
+  <div class="column">
+    <table class="table" style="width:100%"  *ngIf="suites$ | async as suites" >
+      <thead>
+        <th>Suite Name</th>
+        <th>Pass</th>
+        <th>Fail</th>
+        <th>Not Run</th>
+      </thead>
+      
+      <tbody *ngFor="let suite of suites; index as index " [ngClass]="{even: index % 2 === 0, odd: index % 2 !== 0}">
+          <tr>
+            <td scope="row">
+                {{ suite.suiteName }}
+            </td>
+            <td scope="row">
+              {{ suite.totalPass }}
+            </td>
+            <td scope="row">
+              {{ suite.totalFail }}
+            </td>
+            <td scope="row">
+              00000
+            </td>
+          
+          </tr>
+      </tbody>
+      
+    </table>
+  </div>
+  <div class="column header">
+    <h1 style="text-align: center;color: red">Chart</h1>
+    <div class="chart-container" style="height:650px;width:650px;" >
+      <canvas  id="MyChart"
+      >{{ chart }}</canvas>
+  </div>
+  </div>
+</div>

@@ -1,0 +1,73 @@
+<div *ngIf="isCreate">
+    <table class="table" *ngIf="projects$ | async as projects" >
+      <thead>
+        <tr>
+          <th scope="col">Project Id</th>
+          <th scope="col">Project Discription</th>
+          <th scope="col">Project Name</th>
+          <th scope="col">Url</th>
+          <th scope="col">Enable</th>
+          <th scope="col" colspan="2" style="text-align:center">
+            <button class="btn btn-outline-primary " (click)="addForm()">Add</button>
+          </th>     
+          
+        </tr>
+      </thead>
+      <tbody #project *ngFor="let project of projects; index as index " [ngClass]="{even: index % 2 === 0, odd: index % 2 !== 0}">
+        <tr>
+          <td #id scope="row">
+              {{ project.id }}
+          </td>
+          <td scope="row">
+              <input #projectName type="text" [value]=project.projectName >
+          </td>
+          <td scope="row">
+              <input #projectFullName type="text" [value]=project.projectFullName>
+          </td>
+          <td scope="row">
+              <input #url type="text" [value]=project.url>
+          </td>
+          <td scope="row">
+            <input #work type="text" [value]=project.work>
+          </td>
+          <td scope="row">
+            <button class="btn btn-outline-primary"  (click)="updateProject(project.id,projectName.value,projectFullName.value , url.value , work.value)">Update</button>
+          </td>       
+          <td scope="row" >
+            
+            <button class="btn btn-outline-primary" (click)="detailProject(project.id)">
+              <a [routerLink]="['project',project.id]">Details</a>
+            </button>
+          </td>
+        
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+<div *ngIf="!isCreate">
+    
+  <table style="width:50%">
+      <tr>
+        <td>Project Name</td>
+        <td><input #crProjectName type="text" placeholder="Project Name"></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Project Full Name</td>
+        <td><input #crProjectFullName type="text" placeholder="Project Full Name"></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Url</td>
+        <td><input #crUrl type="text" placeholder="Url"></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><button class="btn btn-outline-primary" (click)="addProject(crProjectName.value, crProjectFullName.value , crUrl.value)">Add</button></td>
+        <td></td>
+      </tr>
+  </table>
+    
+</div>
